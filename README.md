@@ -43,6 +43,7 @@ select * from companies LIMIT 5;
 ### Table 'countries'
 ``` sql
 select * from countries LIMIT 5;
+```
 | id | country_name | 
 | -: | -----------: | 
 | 1  | Australia    | 
