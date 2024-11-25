@@ -51,3 +51,29 @@ select * from countries LIMIT 5;
 | 3  | Brazil       | 
 | 4  | Canada       | 
 | 5  | Chile        | 
+
+## Project brief
+### TOP 10 products release the most carbon emissions
+```sql
+select  
+	product_name, industry_group,
+	ROUND(avg(carbon_footprint_pcf),2) average_footprint
+from product_emissions p
+JOIN industry_groups i 
+ON p.industry_group_id = i.id
+GROUP BY product_name, industry_group_id 
+ORDER BY avg(carbon_footprint_pcf) DESC
+LIMIT 10;
+```
+| product_name                                                                                                                       | industry_group                     | average_footprint | 
+| ---------------------------------------------------------------------------------------------------------------------------------: | ---------------------------------: | ----------------: | 
+| Wind Turbine G128 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3718044.00        | 
+| Wind Turbine G132 5 Megawats                                                                                                       | Electrical Equipment and Machinery | 3276187.00        | 
+| Wind Turbine G114 2 Megawats                                                                                                       | Electrical Equipment and Machinery | 1532608.00        | 
+| Wind Turbine G90 2 Megawats                                                                                                        | Electrical Equipment and Machinery | 1251625.00        | 
+| Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit.                                                                 | Automobiles & Components           | 191687.00         | 
+| Retaining wall structure with a main wall (sheet pile): 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall | Materials                          | 167000.00         | 
+| TCDE                                                                                                                               | Materials                          | 99075.00          | 
+| Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | Automobiles & Components           | 91000.00          | 
+| Mercedes-Benz S-Class (S 500)                                                                                                      | Automobiles & Components           | 85000.00          | 
+| Mercedes-Benz SL (SL 350)                                                                                                          | Automobiles & Components           | 72000.00          | 
