@@ -77,3 +77,131 @@ LIMIT 10;
 | Mercedes-Benz GLE (GLE 500 4MATIC)                                                                                                 | Automobiles & Components           | 91000.00          | 
 | Mercedes-Benz S-Class (S 500)                                                                                                      | Automobiles & Components           | 85000.00          | 
 | Mercedes-Benz SL (SL 350)                                                                                                          | Automobiles & Components           | 72000.00          | 
+#### Insights:
+1. Wind Turbine is a product line releasing the most average carbon emissions into the air, included in Electrical Equipment and Machinery industry group. And the highest product is Wind Turbine G128 5 Megawats that its carbon footprint is about 3718044.
+2. The following products are in Automobiles & Components (Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit - average carbon footprint is 191687.00), and Materials industry groups (Retaining wall structure: 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall - 167000.00)
+### Top 3 industries having the highest level of carbon emissions
+``` sql
+select  
+	industry_group,
+	ROUND(avg(carbon_footprint_pcf),2) average_footprint
+from product_emissions p
+JOIN industry_groups i 
+ON p.industry_group_id = i.id
+GROUP BY industry_group 
+ORDER BY avg(carbon_footprint_pcf) DESC
+LIMIT 5;
+```
+| industry_group                                   | average_footprint | 
+| -----------------------------------------------: | ----------------: | 
+| Electrical Equipment and Machinery               | 891050.73         | 
+| Automobiles & Components                         | 35373.48          |
+| "Pharmaceuticals, Biotechnology & Life Sciences" | 24162.00          | 
+| Capital Goods                                    | 7391.77           | 
+| Materials                                        | 3208.86           | 
+#### Insights:
+Electrical Equipment and Machinery both has the highest level of carbon emissions releasing into the air (average carbon footprint:891050.73) and include type of product contributing the most carbon dioxide (Wind Turbine G128 5 Megawats)
+### TOP 5 companies with the highest contribution to carbon emissions
+``` sql
+select  
+	company_name, industry_group,
+	ROUND(avg(carbon_footprint_pcf),2) average_footprint
+from product_emissions p
+JOIN companies c
+ON p.company_id = c.id
+JOIN industry_groups i 
+ON p.industry_group_id = i.id
+GROUP BY company_name, industry_group
+ORDER BY avg(carbon_footprint_pcf) DESC
+LIMIT 5;
+```
+| company_name                           | industry_group                     | average_footprint | 
+| -------------------------------------: | ---------------------------------: | ----------------: | 
+| "Gamesa Corporación Tecnológica, S.A." | Electrical Equipment and Machinery | 2444616.00        | 
+| "Hino Motors, Ltd."                    | Automobiles & Components           | 191687.00         | 
+| Arcelor Mittal                         | Materials                          | 83503.50          | 
+| Weg S/A                                | Capital Goods                      | 70323.50          | 
+| Daimler AG                             | Automobiles & Components           | 43089.19          | 
+### TOP 5 countries with the highest contribution to carbon emissions
+``` sql
+select  
+	country_name Country,
+	ROUND(avg(carbon_footprint_pcf),2) average_footprint
+from product_emissions p
+JOIN countries n
+ON p.country_id = n.id
+GROUP BY country_name
+ORDER BY avg(carbon_footprint_pcf) DESC
+LIMIT 5;
+```
+| Country     | average_footprint | 
+| ----------: | ----------------: | 
+| Spain       | 699009.29         | 
+| Luxembourg  | 83503.50          | 
+| Germany     | 33600.37          | 
+| Brazil      | 9407.61           | 
+| South Korea | 5665.61           | 
+### TREND of PCFs over years
+``` sql
+select  
+	year, avg(carbon_footprint_pcf) Average_carbon_footprint
+FROM product_emissions
+GROUP BY year;
+```
+| year | Average_carbon_footprint | 
+| ---: | -----------------------: | 
+| 2013 | 2399.3190                | 
+| 2014 | 2457.5827                | 
+| 2015 | 43188.9044               | 
+| 2016 | 6891.5210                | 
+| 2017 | 4050.8452                | 
+### TREND of PCFs of industries over years
+``` sql
+SELECT 
+    i.industry_group,
+    ROUND(AVG(CASE WHEN p.year = 2013 THEN p.carbon_footprint_pcf ELSE 0 END), 2) AS avg_2013,
+    ROUND(AVG(CASE WHEN p.year = 2014 THEN p.carbon_footprint_pcf ELSE 0 END), 2) AS avg_2014,
+    ROUND(AVG(CASE WHEN p.year = 2015 THEN p.carbon_footprint_pcf ELSE 0 END), 2) AS avg_2015,
+    ROUND(AVG(CASE WHEN p.year = 2016 THEN p.carbon_footprint_pcf ELSE 0 END), 2) AS avg_2016,
+    ROUND(AVG(CASE WHEN p.year = 2017 THEN p.carbon_footprint_pcf ELSE 0 END), 2) AS avg_2017
+FROM 
+    product_emissions p
+JOIN 
+    industry_groups i
+ON 
+    p.industry_group_id = i.id
+GROUP BY 
+    i.industry_group;
+```
+| industry_group                                                         | avg_2013 | avg_2014 | avg_2015  | avg_2016 | avg_2017 | 
+| ---------------------------------------------------------------------: | -------: | -------: | --------: | -------: | -------: | 
+| "Consumer Durables, Household and Personal Products"                   | 0.00     | 0.00     | 116.38    | 0.00     | 0.00     | 
+| "Food, Beverage & Tobacco"                                             | 39.02    | 20.98    | 0.00      | 783.51   | 24.70    | 
+| "Forest and Paper Products - Forestry, Timber, Pulp and Paper, Rubber" | 0.00     | 0.00     | 685.31    | 0.00     | 0.00     | 
+| "Mining - Iron, Aluminum, Other Metals"                                | 0.00     | 0.00     | 2727.00   | 0.00     | 0.00     | 
+| "Pharmaceuticals, Biotechnology & Life Sciences"                       | 10757.00 | 13405.00 | 0.00      | 0.00     | 0.00     | 
+| "Textiles, Apparel, Footwear and Luxury Goods"                         | 0.00     | 0.00     | 14.33     | 0.00     | 0.00     | 
+| Automobiles & Components                                               | 1783.41  | 3150.89  | 11194.89  | 19244.29 | 0.00     | 
+| Capital Goods                                                          | 1719.71  | 2677.11  | 100.14    | 181.97   | 2712.83  | 
+| Chemicals                                                              | 0.00     | 0.00     | 1949.03   | 0.00     | 0.00     | 
+| Commercial & Professional Services                                     | 26.30    | 10.84    | 0.00      | 65.68    | 16.84    | 
+| Consumer Durables & Apparel                                            | 42.16    | 48.24    | 0.00      | 17.09    | 0.00     | 
+| Containers & Packaging                                                 | 0.00     | 0.00     | 373.50    | 0.00     | 0.00     | 
+| Electrical Equipment and Machinery                                     | 0.00     | 0.00     | 891050.73 | 0.00     | 0.00     | 
+| Energy                                                                 | 150.00   | 0.00     | 0.00      | 2004.80  | 0.00     | 
+| Food & Beverage Processing                                             | 0.00     | 0.00     | 7.05      | 0.00     | 0.00     | 
+| Food & Staples Retailing                                               | 0.00     | 32.21    | 29.42     | 0.08     | 0.00     | 
+| Gas Utilities                                                          | 0.00     | 0.00     | 61.00     | 0.00     | 0.00     | 
+| Household & Personal Products                                          | 0.00     | 0.00     | 0.00      | 0.00     | 0.00     | 
+| Materials                                                              | 1113.96  | 420.43   | 0.00      | 490.37   | 1184.09  | 
+| Media                                                                  | 643.00   | 643.00   | 127.93    | 120.53   | 0.00     | 
+| Retailing                                                              | 0.00     | 3.80     | 2.20      | 0.00     | 0.00     | 
+| Semiconductors & Semiconductor Equipment                               | 0.00     | 10.00    | 0.00      | 0.80     | 0.00     | 
+| Semiconductors & Semiconductors Equipment                              | 0.00     | 0.00     | 1.00      | 0.00     | 0.00     | 
+| Software & Services                                                    | 0.18     | 4.29     | 672.24    | 671.94   | 20.29    | 
+| Technology Hardware & Equipment                                        | 228.84   | 626.82   | 397.59    | 5.87     | 103.34   | 
+| Telecommunication Services                                             | 5.78     | 20.33    | 20.33     | 0.00     | 0.00     | 
+| Tires                                                                  | 0.00     | 0.00     | 1011.00   | 0.00     | 0.00     | 
+| Tobacco                                                                | 0.00     | 0.00     | 1.00      | 0.00     | 0.00     | 
+| Trading Companies & Distributors and Commercial Services & Supplies    | 0.00     | 0.00     | 39.83     | 0.00     | 0.00     | 
+| Utilities                                                              | 30.50    | 0.00     | 0.00      | 30.50    | 0.00     | 
