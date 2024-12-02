@@ -143,23 +143,42 @@ LIMIT 5;
 
 ### TOP 5 countries with the highest contribution to carbon emissions
 ``` sql
-select  
-	country_name Country,
-	ROUND(avg(carbon_footprint_pcf),2) average_footprint
-from product_emissions p
-JOIN countries n
-ON p.country_id = n.id
-GROUP BY country_name
-ORDER BY avg(carbon_footprint_pcf) DESC
-LIMIT 5;
+SELECT
+    Distinct country_name AS Country,
+    industry_group AS The_highest_industry_contribution,
+    ROUND((AVG(p.carbon_footprint_pcf)), 2) AS Average_Carbon_Emission
+FROM
+    product_emissions p
+JOIN
+    countries c ON p.country_id = c.id
+JOIN
+    industry_groups i ON p.industry_group_id = i.id
+GROUP BY
+    country_name
+ORDER BY
+     Average_Carbon_Emission DESC LIMIT 5;
 ```
-| Country     | average_footprint | 
-| ----------: | ----------------: | 
-| Spain       | 699009.29         | 
-| Luxembourg  | 83503.50          | 
-| Germany     | 33600.37          | 
-| Brazil      | 9407.61           | 
-| South Korea | 5665.61           | 
+| Country     | The_highest_industry_contribution | Average_Carbon_Emission | 
+| ----------: | --------------------------------: | ----------------------: | 
+| Spain       | Materials                         | 699009.29               | 
+| Luxembourg  | Materials                         | 83503.50                | 
+| Germany     | Automobiles & Components          | 33600.37                | 
+| Brazil      | Materials                         | 9407.61                 | 
+| South Korea | Materials                         | 5665.61                 | 
+#### Insights
+- The "Materials" industry is the highest contributor to carbon emissions in three out of the five countries listed: Spain, Luxembourg, and Brazil.
+This indicates that the "Materials" industry (e.g., mining, metals, and construction materials) plays a significant role in global emissions, particularly in these regions.
+- Spain has an exceptionally highest average carbon emission of 699,009.29, far exceeding all other countries in this table.
+- Despite being a small country, Luxembourg has a notable contribution from the "Materials" industry with an average emission of 83,503.50.
+- Germany's "Automobiles & Components" industry ranks as the highest contributor to emissions in the country, with 33,600.37 as the average emission.
+This reflects Germany's strong presence in the global automotive market, where manufacturing processes and supply chains for automobiles are carbon-intensive.
+##### Trends:
+###### Industrialized Nations:
+- Countries like Spain, Luxembourg, and Germany showcase how industrialization and consumption patterns drive emissions.
+- Even countries with strong renewable energy initiatives (Germany) still face challenges due to heavy industries.
+###### Emerging Economies:
+- Brazil illustrates the tension between development needs and environmental sustainability. Deforestation and energy demand in emerging economies contribute significantly.
+- Luxembourg, despite its size, highlights how wealth and consumption can lead to high emissions per capita.
 ### TREND of PCFs over years
 ``` sql
 select  
@@ -174,6 +193,7 @@ GROUP BY year;
 | 2015 | 43188.9044               | 
 | 2016 | 6891.5210                | 
 | 2017 | 4050.8452                | 
+#### Insights: 
 ### TREND of PCFs of industries over years
 ``` sql
 SELECT 
