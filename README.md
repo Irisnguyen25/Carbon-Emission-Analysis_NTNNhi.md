@@ -194,6 +194,15 @@ GROUP BY year;
 | 2016 | 6891.5210                | 
 | 2017 | 4050.8452                | 
 #### Insights: 
+##### 2013-2014: Slight decrease
+- A small increase from 2399.32 in 2013 to 2457.58 in 2014.
+##### 2014-2015: Considerable increase
+- The average carbon footprint rises dramatically to 43,188.90 in 2015, a staggering increase of over 1,656% compared to 2014. 
+- It maybe due to economic growth, policies changes.
+##### 2015-2017: Significant decrease
+- In 2016, the average carbon footprint falls sharply to 6891.52, representing an 84% decrease from the peak in 2015 and continue to decrease by 41% in 2017
+--> - Success in implementing sustainable practices or energy efficiency measures.
+- Transition to renewable energy sources or reduced reliance on fossil fuels.
 ### TREND of PCFs of industries over years
 ``` sql
 SELECT 
