@@ -78,8 +78,19 @@ LIMIT 10;
 | Mercedes-Benz S-Class (S 500)                                                                                                      | Automobiles & Components           | 85000.00          | 
 | Mercedes-Benz SL (SL 350)                                                                                                          | Automobiles & Components           | 72000.00          | 
 #### Insights:
-1. Wind Turbine is a product line releasing the most average carbon emissions into the air, included in Electrical Equipment and Machinery industry group. And the highest product is Wind Turbine G128 5 Megawats that its carbon footprint is about 3718044.
-2. The following products are in Automobiles & Components (Land Cruiser Prado. FJ Cruiser. Dyna trucks. Toyoace.IMV def unit - average carbon footprint is 191687.00), and Materials industry groups (Retaining wall structure: 136 tonnes of steel sheet piles and 4 tonnes of tierods per 100 meter wall - 167000.00)
+##### Wind Turbine
+- Wind Turbine, Electrical Equipment and Machinery group, is a product line releasing the most carbon emission into the air, including Wind Turbine G128 5 Megawatts (3,718,044), Wind Turbine G132 5 Megawatts, Wind Turbine G114 2 Megawatts, Wind Turbine G90 2 Megawatts. 
+→ Wind Turbines are known for their environmentally- friendly benefits in terms of renewable energy generation, but their manufacturing process is highly carbon-intensive due to its components production, transportation or installation. → Renewables are not Fully Green
+The higher emission values for larger turbines (G128, G132) align with the scale of material and energy required for manufacturing.
+##### Automobiles and Components
+- The following products are SUV cars and trucks, automobiles and components industry, have carbon emission driven by their production and assembly. 
+Land Cruiser Prado and similar vehicles rank higher, likely due to their focus on durability and off-road capabilities, which demand more materials and larger engines.
+Luxury vehicles like Mercedes-Benz models emit less compared to larger trucks but remain significant due to premium materials and performance features.
+→ Utility-focused vehicles like Land Cruisers have a higher carbon footprint compared to luxury vehicles, despite both relying on carbon-heavy manufacturing processes → focus on researching hybrid or electric SUV
+##### Materials - heavy infrastructure (Retaining Wall Structure and TDCE)
+Retaining walls require large quantities of steel and other industrial materials, which are highly carbon-intensive to produce.
+The process of manufacturing steel involves significant use of coal in blast furnaces, explaining the high emissions.
+
 ### Top 3 industries having the highest level of carbon emissions
 ``` sql
 select  
@@ -122,6 +133,14 @@ LIMIT 5;
 | Arcelor Mittal                         | Materials                          | 83503.50          | 
 | Weg S/A                                | Capital Goods                      | 70323.50          | 
 | Daimler AG                             | Automobiles & Components           | 43089.19          | 
+#### Insights:
+##### Dominance of Electrical Equipment and Machinery
+- Company: Gamesa Corporación Tecnológica, S.A (average_footprint: 2,444,616)
+- This company has an overwhelmingly large carbon footprint compared to others on the list. It could indicate energy-intensive manufacturing or reliance on non-renewable energy sources in production.
+##### Overall
+- All companies on this list are from sectors known for high energy and resource demands (automobiles, materials, machinery, capital goods). Transitioning to renewable energy and adopting circular economy principles could mitigate their environmental impact.
+- Carbon Footprint Gaps: The vast difference in the average carbon footprints (e.g., Gamesa vs. Daimler) might indicate differences in company size, operations scope, or energy efficiency measures.
+
 ### TOP 5 countries with the highest contribution to carbon emissions
 ``` sql
 select  
