@@ -253,3 +253,14 @@ GROUP BY
 | Tobacco                                                                | 0.00     | 0.00     | 1.00      | 0.00     | 0.00     | 
 | Trading Companies & Distributors and Commercial Services & Supplies    | 0.00     | 0.00     | 39.83     | 0.00     | 0.00     | 
 | Utilities                                                              | 30.50    | 0.00     | 0.00      | 30.50    | 0.00     | 
+#### Insights: 
+##### Significant Decreases in PCFs
+- Food, Beverage & Tobacco: Decreased from 39.02 (2014) to 24.70 (2017), indicating better sustainability practices in this sector.
+- Consumer Durables & Apparel: Dropped from 48.24 (2014) to 17.09 (2016), showing a notable improvement in reducing emissions.
+- Technology Hardware & Equipment: Declined from 626.82 (2014) to 103.34 (2017), reflecting advancements in energy efficiency and manufacturing processes.
+##### Industries with Fluctuations
+- Materials: Started at 1113.96 (2013), dropped significantly in 2014 (420.43), and rose to 1184.09 (2017), suggesting inconsistent sustainability practices.
+- Software & Services: Increased drastically from 0.18 (2013) to 672.24 (2015), then decreased to 20.29 (2017), reflecting high variability.
+##### Industries with Increasing PCFs
+- Automobiles & Components: Increased significantly from 1783.41 (2013) to 19424.29 (2016), possibly due to higher production or inefficient processes.
+- Pharmaceuticals, Biotechnology & Life Sciences: Rose steadily from 10757.00 (2013) to 13405.00 (2014), with no data in later years
